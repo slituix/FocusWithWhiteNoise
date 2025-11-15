@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
     <head>
         <meta charset="utf8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -9,43 +8,105 @@
         <meta name="author" content="MiRinChan">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <link rel="shortcut icon" type="image/png" href="favicon.png">
-        <link rel="stylesheet" href="main.light.base.css">
-        <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,0,0" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,0,0" />
         <title>Focus with white noise</title>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <style type="text/tailwindcss">
+            @theme {
+                --color-dark-bg: #111122;
+                --color-dark-text: #fbfbfb;
+                --color-dark-border: #949494;
+                --color-button-shadow-light: rgb(116 116 116);
+                --color-button-shadow-dark: rgb(65 65 65);
+            }
 
-    </head>
+            .btn-3d {
+                outline: none;
+                border: 5px solid #363636;
+                border-radius: 13.7px;
+                margin: 5px;
+                padding: 1rem 0.5rem;
+                background-color: transparent;
+                width: 5rem;
+                height: 5rem;
+                text-align: center;
+                font-size: 1.3em;
+                box-shadow: 0 0.67rem 0 var(--color-button-shadow-light);
+                transition: all 150ms;
+            }
 
-    <body>
-        <header aria-label="Focus with white noise" id="title">Focus <span>with white noise</span></header>
-        <noscript>Did you turn on Allow JavaScript?</noscript>
-        <div class="controls">
-            <p style="display: none;" id="loading">Still in loading...</p>
-            <div role="toolbar" aria-labelledby="control panel">
-                <div class="FixBox"><button aria-label="play and pause" tabindex="1" role="option" aria-setsize="2" aria-posinset="1" id="play"><span class="material-symbols-outlined">
-                            play_arrow
-                        </span></button></div>
-                <div class="FixBox"><button aria-label="dark mode" tabindex="2" role="option" aria-setsize="2" aria-posinset="2" id="dark"><span class="material-symbols-outlined">
-                            dark_mode
-                        </span></button></div>
-                <div class="FixBox" aria-hidden="true"><button tabindex="3" id="clean"><span class="material-symbols-outlined">
-                            transition_fade
-                        </span></button></div>
+            .dark .btn-3d {
+                border-color: var(--color-dark-border);
+                color: var(--color-dark-text);
+                box-shadow: 0 0.67rem 0 var(--color-button-shadow-dark);
+            }
+
+            .btn-3d:hover {
+                box-shadow: 0 0.5rem 0 var(--color-button-shadow-light);
+                padding: 1.5rem 0.5rem 3.09rem 0.5rem;
+            }
+
+            .dark .btn-3d:hover {
+                box-shadow: 0 0.5rem 0 var(--color-button-shadow-dark);
+            }
+
+            .btn-3d:active,
+            .btn-3d.active {
+                box-shadow: 0 0.3rem 0 var(--color-button-shadow-light);
+                padding: 1.8rem 0.5rem 3rem 0.5rem;
+            }
+
+            .dark .btn-3d:active,
+            .dark .btn-3d.active {
+                box-shadow: 0 0.3rem 0 var(--color-button-shadow-dark);
+            }
+        </style>
+    <script type="module" crossorigin src="./main.js"></script></head>
+
+    <body class="font-sans transition-colors duration-300 dark:bg-[var(--color-dark-bg)] dark:text-[var(--color-dark-text)]">
+        <header aria-label="Focus with white noise" id="title" class="text-center text-5xl font-semibold mt-[15vh] m-4 p-4">
+            Focus <span class="opacity-80 text-[2rem] font-light block -mt-1">with white noise</span>
+        </header>
+        
+        <noscript class="block text-center">Did you turn on Allow JavaScript?</noscript>
+        
+        <div class="text-center w-full">
+            <p class="hidden opacity-15" id="loading">Still in loading...</p>
+            <div role="toolbar" aria-labelledby="control panel" class="inline-flex flex-nowrap">
+                <div class="h-28">
+                    <button aria-label="play and pause" tabindex="1" role="option" aria-setsize="2" aria-posinset="1" id="play" class="btn-3d">
+                        <span class="material-symbols-outlined">play_arrow</span>
+                    </button>
+                </div>
+                <div class="h-28">
+                    <button aria-label="dark mode" tabindex="2" role="option" aria-setsize="2" aria-posinset="2" id="dark" class="btn-3d">
+                        <span class="material-symbols-outlined">dark_mode</span>
+                    </button>
+                </div>
+                <div class="h-28" aria-hidden="true">
+                    <button tabindex="3" id="clean" class="btn-3d">
+                        <span class="material-symbols-outlined">transition_fade</span>
+                    </button>
+                </div>
             </div>
         </div>
 
-        <div tabindex="0" aria-label="turn off blank mode" id="blankMode" class="hidden"><p class="tips">Blank mode is on. Click or touch to off.</p></div>
+        <div tabindex="0" aria-label="turn off blank mode" id="blankMode" class="hidden fixed inset-0 bg-black z-[3] flex justify-center items-center text-white">
+            <p class="tips opacity-100 transition-opacity duration-[3s] ease-in-out">Blank mode is on. Click or touch to off.</p>
+        </div>
 
-        <audio aria-hidden="true" preload="auto" loop style="display: none;" id="audio">
-            <source src="whitenoise.ogg" type="audio/ogg">
+        <audio aria-hidden="true" preload="auto" loop class="hidden" id="audio">
+            <source src="./whitenoise.ogg" type="audio/ogg">
             Your browser is not supported.
         </audio>
-        <footer aria-hidden="true" >
-            <p><span class="material-symbols-outlined">
-                    copyright
-                </span>MiRinChan | <a tabindex="-1" href="https://afdian.com/a/mirin">Donate with 爱发电</a> </p>
+        
+        <footer aria-hidden="true" class="absolute bottom-0 left-0 right-0 p-4 text-center text-xs opacity-20 z-[2] font-mono">
+            <p>
+                <span class="material-symbols-outlined text-[0.7em]">copyright</span>
+                MiRinChan | <a tabindex="-1" href="https://afdian.com/a/mirin" class="underline text-black dark:text-[var(--color-dark-text)]">Donate with 爱发电</a>
+            </p>
         </footer>
-        <script src="main.script.js"></script>
+        
+        
     </body>
-
 </html>
