@@ -12,13 +12,9 @@
         <title>Focus with white noise</title>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <style type="text/tailwindcss">
-            @theme {
-                --color-dark-bg: #111122;
-                --color-dark-text: #fbfbfb;
-                --color-dark-border: #949494;
-                --color-button-shadow-light: rgb(116 116 116);
-                --color-button-shadow-dark: rgb(65 65 65);
-            }
+            @import "tailwindcss";
+            
+            @custom-variant dark (&:where(.dark, .dark *));
 
             .btn-3d {
                 outline: none;
@@ -31,39 +27,39 @@
                 height: 5rem;
                 text-align: center;
                 font-size: 1.3em;
-                box-shadow: 0 0.67rem 0 var(--color-button-shadow-light);
+                box-shadow: 0 0.67rem 0 rgb(116, 116, 116);
                 transition: all 150ms;
             }
 
             .dark .btn-3d {
-                border-color: var(--color-dark-border);
-                color: var(--color-dark-text);
-                box-shadow: 0 0.67rem 0 var(--color-button-shadow-dark);
+                border-color: #949494;
+                color: #fbfbfb;
+                box-shadow: 0 0.67rem 0 rgb(65, 65, 65);
             }
 
             .btn-3d:hover {
-                box-shadow: 0 0.5rem 0 var(--color-button-shadow-light);
+                box-shadow: 0 0.5rem 0 rgb(116, 116, 116);
                 padding: 1.5rem 0.5rem 3.09rem 0.5rem;
             }
 
             .dark .btn-3d:hover {
-                box-shadow: 0 0.5rem 0 var(--color-button-shadow-dark);
+                box-shadow: 0 0.5rem 0 rgb(65, 65, 65);
             }
 
             .btn-3d:active,
             .btn-3d.active {
-                box-shadow: 0 0.3rem 0 var(--color-button-shadow-light);
+                box-shadow: 0 0.3rem 0 rgb(116, 116, 116);
                 padding: 1.8rem 0.5rem 3rem 0.5rem;
             }
 
             .dark .btn-3d:active,
             .dark .btn-3d.active {
-                box-shadow: 0 0.3rem 0 var(--color-button-shadow-dark);
+                box-shadow: 0 0.3rem 0 rgb(65, 65, 65);
             }
         </style>
-    <script type="module" crossorigin src="./main.js"></script></head>
+    </head>
 
-    <body class="font-sans transition-colors duration-300 dark:bg-[var(--color-dark-bg)] dark:text-[var(--color-dark-text)]">
+    <body class="font-sans transition-colors duration-300 dark:bg-[#111122] dark:text-[#fbfbfb]">
         <header aria-label="Focus with white noise" id="title" class="text-center text-5xl font-semibold mt-[15vh] m-4 p-4">
             Focus <span class="opacity-80 text-[2rem] font-light block -mt-1">with white noise</span>
         </header>
@@ -103,10 +99,10 @@
         <footer aria-hidden="true" class="absolute bottom-0 left-0 right-0 p-4 text-center text-xs opacity-20 z-[2] font-mono">
             <p>
                 <span class="material-symbols-outlined text-[0.7em]">copyright</span>
-                MiRinChan | <a tabindex="-1" href="https://afdian.com/a/mirin" class="underline text-black dark:text-[var(--color-dark-text)]">Donate with 爱发电</a>
+                MiRinChan | <a tabindex="-1" href="https://afdian.com/a/mirin" class="underline text-black dark:text-[#fbfbfb]">Donate with 爱发电</a>
             </p>
         </footer>
         
-        
+        <script src="main.script.js"></script>
     </body>
 </html>
